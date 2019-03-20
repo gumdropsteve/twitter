@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 
 '''
 set up setup and define constants (paths)
+  - done here for easy editing 
 '''
 # driver setup
 options = webdriver.FirefoxOptions()  
@@ -22,40 +23,46 @@ pwrd = ''  # your password here
 
 
 class Tweet:
+    '''
+    simple overview:
+        1) open browser
+        2) log in to twitter
+        3) locate and engage tweet box
+        4) send tweet (keys) to tweet box
+        5) tweet
+    note: 
+        sleep included for loadtimes
+    '''
+
     def __init__( self , username , password , status ):
         self.username = username
         self.password = password
         self.status = status
-    '''
-    1) log in to twitter
-    2) locate and engage tweet box
-    3) send tweet (keys) to tweet box
-    4) tweet
-    '''
 
     def set_browser( self ):
-        # set driver
+        # set driver (GeckoDriver) using previously defined options
+        # done here to avoid browser popping up before status is set
         self.driver = webdriver.Firefox( options=options ) 
     
     def login( self ):
-        # get login page
+        # load login page
         self.driver.get( twitter_login_page ) 
         sleep( 1 )
-        # send username
+        # send username to username input box
         self.driver.find_element_by_css_selector( user_box ).send_keys( self.username )
         sleep( 1 )
-        # send password
+        # send password to password input box
         self.driver.find_element_by_css_selector( pass_box ).send_keys( self.password )
         sleep( 1 )
-        # login
+        # click button to login
         self.driver.find_element_by_css_selector( login_button ).click()
         sleep( 2 )
     
     def send_status( self ):
-        # send status
+        # send status to status input box 
         self.driver.find_element_by_css_selector( tweet_box ).send_keys( self.status )
         sleep( 1 )
-        # tweet
+        # click button to tweet
         self.driver.find_element_by_css_selector( tweet_button ).click()
         sleep( 5 )
     
@@ -64,6 +71,7 @@ class Tweet:
         self.driver.close()
     
     def run_all( self ):
+        # do it all 
         self.set_browser()
         self.login()
         self.send_status()
@@ -72,7 +80,12 @@ class Tweet:
         return f'sent tweet: { self.status } \nto account: { self.username }'
 
 
-my_tweet = input( 'status? ' )
+# call for status
+my_tweet = input( "what's your status? " )
+
+# check length for compliance
 if len( my_tweet ) > 280:
-    raise Exception( f'tweet too long { len( my_tweet ) }' )
+    raise Exception( f'tweet too long \n{ len( my_tweet ) } > 280' )
+
+# let's do it
 print( Tweet( user , pwrd , my_tweet ).run_all() )
