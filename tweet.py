@@ -1,6 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from user_info import u , p  # delete this line , or make a user_info file
 
 '''
 set up setup and define constants (paths)
@@ -18,8 +19,8 @@ login_button = 'button.submit'
 tweet_box = '#tweet-box-home-timeline'  
 tweet_button = 'form.tweet-form:nth-child(2) > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)'
 # user
-user = ''  # your account here
-pwrd = ''  # your password here
+user = u  # your account here
+pwrd = p  # your password here
 
 
 class Tweet:
