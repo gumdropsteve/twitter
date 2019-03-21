@@ -108,3 +108,7 @@ venv.bak/
 geckodriver.log
 .geckodriver.log
 geckodriver
+
+
+# user info
+user_info.py
