@@ -5,6 +5,7 @@ Python OOP script to send tweets from terminal using Selenium
 Python script to retweet my tweets and increase clout
 
 #### Helps:
+  - getting started with Selenium: https://github.com/SeleniumHQ/selenium/ 
   - installing GeckoDriver: https://www.kenst.com/2016/12/installing-marionette-firefoxdriver-on-mac-osx/ 
   - installing ChromeDriver: http://chromedriver.chromium.org/getting-started
 
