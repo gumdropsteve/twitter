@@ -3,11 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from login_info import user, pwrd
 
-'''
-set up setup and define constants (paths)
-  - done here for easy editing 
-'''
-# driver setup
+# GeckoDriver setup
 options = webdriver.FirefoxOptions()  
 options.set_preference( 'dom.push.enabled' , False )  # blocks popups 
 
