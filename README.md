@@ -1,7 +1,7 @@
-## tweet_your_tweet
+### tweet_your_tweet
 Simple Python OOP script to send tweets from terminal using Selenium
 
-## retweet_for_clout
+### retweet_for_clout
 Simple script to retweet my tweets and increase clout
 
   - Helps:
