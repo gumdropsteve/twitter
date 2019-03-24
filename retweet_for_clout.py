@@ -1,62 +1,90 @@
-def re_tweet_this_tweet(tweet):
-    import time
-    from time import sleep
-    from selenium import webdriver
-    from selenium.webdriver.common.by import By
+import time
+from time import sleep
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from login_info import user, pwrd
 
-    now = time.time()  # function start time
+# ChromeDiver set up (for no notifications)
+chrome_options = webdriver.ChromeOptions()   
+prefs = { 'profile.default_content_setting_values.notifications': 2 }
+chrome_options.add_experimental_option( 'prefs' , prefs )
 
-    # diver set up
-    chrome_options = webdriver.ChromeOptions()  # set up driver for no notifications
-    prefs = {"profile.default_content_setting_values.notifications": 2}
-    chrome_options.add_experimental_option("prefs", prefs)
-    driver = webdriver.Chrome(options=chrome_options)  # disables notifications (thanks @najbot)
 
-    # twitter xpath(s)
-    twitter_login_page = 'https://twitter.com/login'
-    twitter_login_field = '/html/body/div[1]/div[2]/div/div/div[1]/form/fieldset/div[1]/input'
-    twitter_password_field = '/html/body/div[1]/div[2]/div/div/div[1]/form/fieldset/div[2]/input'
-    twitter_login_button = '/html/body/div[1]/div[2]/div/div/div[1]/form/div[2]/button'
-    re_tweet_button = '/html/body/div[45]/div[2]/div[3]/div/div/div[1]/div[1]/div/div[4]/div[2]/div[2]/button[1]'
-    confirm_re_tweet_button = '//*[@id="retweet-tweet-dialog-dialog"]/div[2]/form/div[2]/div[3]/button/span[1]'
+def login_to_twitter():
+    from paths import login_page, x_login_field, x_password_field, x_login_button
+    '''
+    uses Selenium ChromeDriver to log in to Twitter
+    '''
+    # make driver
+    driver = webdriver.Chrome( options=chrome_options )  # disables notifications (thanks @najbot)
 
-    # account info
-    account_email = 'YOUR EMAIL HERE'  # email or handle
-    account_password = 'YOUR PASSWORD HERE'  # password
+    # get login page
+    driver.get( twitter_login_page )
+    sleep( 2 )
 
-    def login_to_twitter():
-        driver.get(twitter_login_page)
-        driver.maximize_window()
-        sleep(2)
-        login_field = driver.find_element(By.XPATH, twitter_login_field)
-        login_field.send_keys(account_email)
-        sleep(2)
-        password_field = driver.find_element(By.XPATH, twitter_password_field)
-        password_field.send_keys(account_password)
-        sleep(2)
-        lets_log_into_twitter = driver.find_element(By.XPATH, twitter_login_button)
-        lets_log_into_twitter.click()
-        sleep(2)
+    # send username
+    login_field = driver.find_element( By.XPATH , x_login_field )
+    login_field.send_keys( user )
+    sleep( 1 )
 
-    def re_tweet():
-        driver.get(tweet)
-        sleep(2)
-        re_tweet_ing = driver.find_element(By.XPATH, re_tweet_button)
-        re_tweet_ing.click()
-        sleep(2)
-        confirm_re_tweet_ing = driver.find_element(By.XPATH, confirm_re_tweet_button)
-        confirm_re_tweet_ing.click()
-        sleep(2)
+    # send password
+    password_field = driver.find_element( By.XPATH , x_password_field )
+    password_field.send_keys( pwrd ) 
+    sleep( 1 )
+
+    # login
+    lets_log_into_twitter = driver.find_element( By.XPATH , x_login_button )
+    lets_log_into_twitter.click()
+    sleep( 2 )
+
+
+def re_tweet( tweet ):
+    '''
+    uses Selenium ChromeDriver to retweet a tweet
+
+    input) tweet you want to retweet
+    '''
+    # load the tweet 
+    driver.get( tweet )
+    sleep( 2 )
+
+    # locate and click the retweet button
+    re_tweet_ing = driver.find_element( By.XPATH , re_tweet_button )
+    re_tweet_ing.click()
+    sleep( 2 )
+
+    # confirm the retweet and retweet
+    confirm_re_tweet_ing = driver.find_element( By.XPATH , confirm_re_tweet_button )
+    confirm_re_tweet_ing.click()
+    # sleep so user can see load (if desired)
+    sleep( 5 )
+
+
+def re_tweet_this_tweet():
+    '''
+    times and executes login_to_twitter and re_tweet
+    '''
+    # function start time
+    now = time.time()
 
     # function
     login_to_twitter()
     re_tweet()
     
-    print('task completed..')
-    then = time.time()  # function end time
-    print('execution:', then - now, 'seconds')
-    return
+    # function end time
+    then = time.time()  
+
+    return 'execution:', then - now, 'seconds'
 
 
-# status_to_retweet = ''
-# re_tweet_this_tweet(status_to_retweet)
+# check that username and password are logical
+if len( user ) or len( pwrd ) < 1:
+    raise Exception('illogical username or password'
+                    '\nplease check you have correctly entered your login information - login_info.py'
+                    f'\ncurrent user = {user} , current password = {pwrd}') 
+
+# input the link to your tweet of interest
+status_to_retweet = input( 'link to tweet: ' )
+
+# retweet the tweet of interest
+re_tweet_this_tweet( status_to_retweet )

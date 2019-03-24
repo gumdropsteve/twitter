@@ -1,7 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from user_info import u , p  # delete this line , or make a user_info file
+from login_info import user, pwrd
 
 '''
 set up setup and define constants (paths)
@@ -10,20 +10,10 @@ set up setup and define constants (paths)
 # driver setup
 options = webdriver.FirefoxOptions()  
 options.set_preference( 'dom.push.enabled' , False )  # blocks popups 
-# site
-twitter_login_page = 'https://twitter.com/login'
-# paths
-user_box = '.js-username-field'
-pass_box = '.js-password-field'
-login_button = 'button.submit'
-tweet_box = '#tweet-box-home-timeline'  
-tweet_button = 'form.tweet-form:nth-child(2) > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)'
-# user
-user = u  # your account here
-pwrd = p  # your password here
 
 
 class Tweet:
+    from paths import login_page, user_box, pass_box, login_button, tweet_box, tweet_button
     '''
     simple overview:
         1) open browser
@@ -80,6 +70,12 @@ class Tweet:
         # report
         return f'sent tweet: { self.status } \nto account: { self.username }'
 
+
+# check that username and password are logical
+if len( user ) or len( pwrd ) < 1:
+    raise Exception('illogical username or password'
+                    '\nplease check you have correctly entered your login information - login_info.py'
+                    f'\ncurrent user = {user} , current password = {pwrd}') 
 
 # call for status
 my_tweet = input( "what's your status? " )
