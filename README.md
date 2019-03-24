@@ -6,6 +6,7 @@ Python script to retweet my tweets and increase clout
 
 #### Helps:
   - installing GeckoDriver: https://www.kenst.com/2016/12/installing-marionette-firefoxdriver-on-mac-osx/ 
+  - installing ChromeDriver: http://chromedriver.chromium.org/getting-started
 
 #### Notes: 
   - code is spaced , trying out new approaches to increase readibility (feedback welcome)  --thanks
