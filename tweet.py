@@ -1,6 +1,7 @@
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from paths import login_page, user_box, pass_box, login_button, tweet_box, tweet_button
 from login_info import user, pwrd
 
 # GeckoDriver setup
@@ -8,8 +9,7 @@ options = webdriver.FirefoxOptions()
 options.set_preference( 'dom.push.enabled' , False )  # blocks popups 
 
 
-class Tweet:
-    from paths import login_page, user_box, pass_box, login_button, tweet_box, tweet_button
+class Tweet:    
     '''
     simple overview:
         1) open browser
@@ -33,7 +33,7 @@ class Tweet:
     
     def login( self ):
         # load login page
-        self.driver.get( twitter_login_page ) 
+        self.driver.get( login_page ) 
         sleep( 1 )
         # send username to username input box
         self.driver.find_element_by_css_selector( user_box ).send_keys( self.username )
@@ -68,10 +68,9 @@ class Tweet:
 
 
 # check that username and password are logical
-if len( user ) or len( pwrd ) < 1:
-    raise Exception('illogical username or password'
-                    '\nplease check you have correctly entered your login information - login_info.py'
-                    f'\ncurrent user = {user} , current password = {pwrd}') 
+if len( user ) < 1 or len( pwrd ) < 1:
+    raise Exception('illogical username or password\nplease check you have correctly entered your login information \n@ login_info.py\n'
+                    f'current user = {user} (len={len(user)})\ncurrent password = {pwrd} (len={len(pwrd)})') 
 
 # call for status
 my_tweet = input( "what's your status? " )
