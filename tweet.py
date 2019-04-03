@@ -81,7 +81,7 @@ if len( my_tweet ) > 280:
 
 # option to enter username upon call
 if user == '__OPT-OUT__':
-    user = input('password: ')
+    user = input('username: ')
 
 # option to enter password upon call
 if pwrd == '__OPT-OUT__':
