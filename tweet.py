@@ -79,5 +79,9 @@ my_tweet = input( "what's your status? " )
 if len( my_tweet ) > 280:
     raise Exception( f'tweet too long \n{ len( my_tweet ) } > 280' )
 
+# option to enter password upon call
+if pwrd == '__OPT-OUT__':
+    pwrd = input('password: ')
+
 # let's do it
 print( Tweet( user , pwrd , my_tweet ).run_all() )
