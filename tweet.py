@@ -75,9 +75,16 @@ if len( user ) < 1 or len( pwrd ) < 1:
 # call for status
 my_tweet = input( "what's your status? " )
 
+# check that username and password are logical
+if len( user ) < 1 or len( pwrd ) < 1:
+    raise Exception('illogical username or password\nplease check you have correctly entered your login information \n@ login_info.py\n'
+                    f'current user = {user} (len={len(user)})\ncurrent password = {pwrd} (len={len(pwrd)})') 
+
 # check length for compliance
 if len( my_tweet ) > 280:
     raise Exception( f'tweet too long \n{ len( my_tweet ) } > 280' )
+if len( my_tweet ) < 1:
+    raise Exception( f'tweet too short \n{ len( my_tweet ) } < 1' )
 
 # option to enter username upon call
 if user == '__OPT-OUT__':
@@ -86,6 +93,10 @@ if user == '__OPT-OUT__':
 # option to enter password upon call
 if pwrd == '__OPT-OUT__':
     pwrd = input('password: ')
+
+# check that username and password are logical
+if len( user ) < 1 or len( pwrd ) < 1:
+    raise Exception(f'illogical username or password\ncurrent user = {user} (len={len(user)})\ncurrent password = {pwrd} (len={len(pwrd)})') 
 
 # let's do it
 print( Tweet( user , pwrd , my_tweet ).run_all() )
