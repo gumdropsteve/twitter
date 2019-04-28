@@ -3,6 +3,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from login_info import user, pwrd
+from paths import login_page, x_login_field, x_password_field, x_login_button
 
 # ChromeDiver set up (for no notifications)
 chrome_options = webdriver.ChromeOptions()   
@@ -11,7 +12,6 @@ chrome_options.add_experimental_option( 'prefs' , prefs )
 
 
 def login_to_twitter():
-    from paths import login_page, x_login_field, x_password_field, x_login_button
     '''
     uses Selenium ChromeDriver to log in to Twitter
     '''
