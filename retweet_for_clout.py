@@ -89,15 +89,17 @@ def re_tweet_this_tweet():
     return 'execution:', int( then - now ), 'seconds'
 
 
-# check that username and password are logical
-if len( user ) or len( pwrd ) < 1:
-    # cause a ruckus if they're not
-    raise Exception( 'illogical username or password'
-                    '\nplease check you have correctly entered your login information - login_info.py'
-                    f'\ncurrent user = { user } , current password = { pwrd }' ) 
+# let's do it
+if __name__ == '__main__':
+    # check that username and password are logical
+    if len( user ) or len( pwrd ) < 1:
+        # cause a ruckus if they're not
+        raise Exception( 'illogical username or password'
+                        '\nplease check you have correctly entered your login information - login_info.py'
+                        f'\ncurrent user = { user } , current password = { pwrd }' ) 
 
-# input the link to your tweet of interest
-status_to_retweet = input( 'link to tweet: ' )
+    # input the link to your tweet of interest
+    status_to_retweet = input( 'link to tweet: ' )
 
-# retweet the tweet of interest
-re_tweet_this_tweet( status_to_retweet )
+    # retweet the tweet of interest
+    re_tweet_this_tweet( status_to_retweet )
