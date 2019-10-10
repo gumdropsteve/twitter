@@ -12,5 +12,6 @@ confirm_re_tweet_button = '//*[@id="retweet-tweet-dialog-dialog"]/div[2]/form/di
 user_box = '.js-username-field'
 pass_box = '.js-password-field'
 login_button = 'button.submit'
-tweet_box = '#tweet-box-home-timeline'  
-tweet_button = 'form.tweet-form:nth-child(2) > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)'
+tweet_box =   '.DraftEditor-editorContainer'  
+tweet_button = '//button[contains(text(),"Tweet")]'
+#'form.tweet-form:nth-child(2) > div:nth-child(3) > div:nth-child(2) > button:nth-child(2)'
